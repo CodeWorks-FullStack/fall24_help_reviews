@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "client",
+      "path": "client"
+    },
+    {
+      "name": "server",
+      "path": "server"
+    }
+  ],
+  "settings": {
+    "[snippets]": {
+      "Try Catch CSharp": {
+        "prefix": "TESTING",
+        "body": "FIXME PLEASE",
+        "description": "Adds a try catch for a controller",
+      }
+    }
+  },
+}
