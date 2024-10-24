@@ -25,7 +25,7 @@ public class RestaurantsController : ControllerBase
     {
       // NOTE we can still see who is making the request
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      // NOTE make sure to add elvis operator if route is not authorized, because userInfo will be null
+      // NOTE make sure to add elvis operator if route is not authorized, because userInfo can be null
       List<Restaurant> restaurants = _rs.GetRestaurants(userInfo?.Id);
       return Ok(restaurants);
     }

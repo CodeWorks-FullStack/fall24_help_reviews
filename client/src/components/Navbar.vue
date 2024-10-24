@@ -31,6 +31,9 @@ function toggleTheme() {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#review-modal">
+            Report! <i class="mdi mdi-file-document"></i>
+          </button>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->

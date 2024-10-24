@@ -85,7 +85,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="col-lg-8 m-auto">
-        <h2>Reports for <span class="text-success">{{ restaurant.name }}</span></h2>
+        <h2>Reviews for <span class="text-success">{{ restaurant.name }}</span></h2>
         <div v-for="review in reviews" :key="review.id" class="mb-3">
           <ReviewCard :review="review" />
         </div>
