@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import ReviewCard from '@/components/ReviewCard.vue';
 import { restaurantsService } from '@/services/RestaurantsService.js';
 import { reviewsService } from '@/services/ReviewsService.js';
 import { logger } from '@/utils/Logger.js';
@@ -63,7 +64,7 @@ onMounted(() => {
                   </div>
                   <div>
                     <i class="mdi mdi-file-document fs-1 text-success"></i>
-                    <b>{{ restaurant.reviewCount }}</b>
+                    <b>{{ reviews.length }}</b>
                     <span> reviews</span>
                   </div>
                 </div>
@@ -80,7 +81,9 @@ onMounted(() => {
       </div>
       <div class="col-lg-8 m-auto">
         <h2>Reports for <span class="text-success">{{ restaurant.name }}</span></h2>
-        {{ reviews }}
+        <div v-for="review in reviews" :key="review.id" class="mb-3">
+          <ReviewCard :review="review" />
+        </div>
       </div>
     </div>
   </div>
