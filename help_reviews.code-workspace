@@ -16,6 +16,28 @@
         "body": "FIXME PLEASE",
         "description": "Adds a try catch for a controller",
       }
-    }
+    },
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#c16c75",
+      "activityBar.background": "#c16c75",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#96d08f",
+      "activityBarBadge.foreground": "#15202b",
+      "commandCenter.border": "#e7e7e799",
+      "sash.hoverBorder": "#c16c75",
+      "statusBar.background": "#b04a55",
+      "statusBar.debuggingBackground": "#4ab0a5",
+      "statusBar.debuggingForeground": "#15202b",
+      "statusBar.foreground": "#e7e7e7",
+      "statusBarItem.hoverBackground": "#c16c75",
+      "statusBarItem.remoteBackground": "#b04a55",
+      "statusBarItem.remoteForeground": "#e7e7e7",
+      "titleBar.activeBackground": "#b04a55",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveBackground": "#b04a5599",
+      "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#b04a55"
   },
 }
