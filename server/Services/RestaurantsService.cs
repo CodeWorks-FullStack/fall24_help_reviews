@@ -1,5 +1,6 @@
 
 
+
 namespace help_reviews.Services;
 
 public class RestaurantsService
@@ -31,8 +32,23 @@ public class RestaurantsService
 
     Restaurant restaurant = _rr.Get(restaurantId);
 
-    // Might want to null check
+    // Might want to null check ✅
+    if (restaurant == null) throw new Exception($"Invalid id: {restaurantId}");
 
     return restaurant;
   }
+
+  internal Restaurant ShutdownRestaurant(int restaurantId, string userId)
+  {
+    Restaurant restaurantToShutdown = Get(restaurantId);
+
+    if (restaurantToShutdown.CreatorId != userId) throw new Exception("NOT YOUR RESTAURANT, BIG DAWG");
+
+    restaurantToShutdown.IsShutdown = !restaurantToShutdown.IsShutdown;
+
+    _rr.ShutdownRestaurant(restaurantToShutdown);
+
+    return restaurantToShutdown;
+  }
+
 }

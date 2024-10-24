@@ -86,6 +86,21 @@ public class RestaurantsController : ControllerBase
     }
   }
 
+  [Authorize]
+  [HttpDelete("{restaurantId}")]
+  public async Task<ActionResult<Restaurant>> ShutdownRestaurant(int restaurantId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Restaurant restaurant = _rs.ShutdownRestaurant(restaurantId, userInfo.Id);
+      return Ok(restaurant);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 
 
 

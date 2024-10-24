@@ -1,6 +1,7 @@
 
 
 
+
 namespace help_reviews.Repositories;
 
 public class RestaurantsRepository
@@ -116,6 +117,18 @@ public class RestaurantsRepository
     //   r.Owner = p;
     //   return r;
     // }).ToList();
+  }
+
+  internal void ShutdownRestaurant(Restaurant restaurantToShutdown)
+  {
+    string sql = "UPDATE restaurants SET isShutdown = @IsShutDown WHERE id = @Id LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, restaurantToShutdown);
+
+    if (rowsAffected != 1)
+    {
+      throw new Exception($"{rowsAffected} rows were affected, UH OH BETTER FIX IT");
+    }
   }
 }
 
