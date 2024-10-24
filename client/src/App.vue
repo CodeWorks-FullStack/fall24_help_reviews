@@ -2,6 +2,7 @@
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import ModalWrapper from './components/ModalWrapper.vue';
+import ReviewForm from './components/ReviewForm.vue';
 
 </script>
 
@@ -17,7 +18,7 @@ import ModalWrapper from './components/ModalWrapper.vue';
   </footer>
 
   <ModalWrapper modalId="review-modal" header="Create Review">
-
+    <ReviewForm />
   </ModalWrapper>
 </template>
 
