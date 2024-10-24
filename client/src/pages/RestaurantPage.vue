@@ -1,6 +1,8 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { restaurantsService } from '@/services/RestaurantsService.js';
+import { reviewsService } from '@/services/ReviewsService.js';
+import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
@@ -18,8 +20,18 @@ async function getRestaurant() {
   }
 }
 
+async function getRestaurantReviews() {
+  try {
+    await reviewsService.getRestaurantReviews(route.params.restaurantId)
+  } catch (error) {
+    Pop.error(error)
+    logger.error(error)
+  }
+}
+
 onMounted(() => {
   getRestaurant()
+  getRestaurantReviews()
 })
 
 
