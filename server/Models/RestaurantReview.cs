@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using help_reviews.interfaces;
 
 // NOTE generally abstract all DTO's
@@ -5,6 +6,7 @@ public class RestaurantReviewCreationDTO
 {
   public string Title { get; set; }
   public string Body { get; set; }
+  [MaxLength(3000)]
   public string ImgUrl { get; set; }
   public int RestaurantId { get; set; }
 }
