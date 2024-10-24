@@ -8,6 +8,7 @@ import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 const restaurant = computed(() => AppState.restaurant)
+const reviews = computed(() => AppState.reviews)
 const account = computed(() => AppState.account)
 const route = useRoute()
 
@@ -40,7 +41,7 @@ onMounted(() => {
 <template>
   <div class="container restaurant" v-if="restaurant">
     <div class="row">
-      <div class="col-lg-10 m-auto">
+      <div class="col-lg-10 m-auto mb-3">
         <div class="py-2">
           <div class="d-flex justify-content-between">
             <h1 class="text-success">{{ restaurant.name }}</h1>
@@ -76,6 +77,10 @@ onMounted(() => {
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-lg-8 m-auto">
+        <h2>Reports for <span class="text-success">{{ restaurant.name }}</span></h2>
+        {{ reviews }}
       </div>
     </div>
   </div>

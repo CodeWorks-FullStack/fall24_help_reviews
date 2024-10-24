@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import { Restaurant } from './models/Restaurant.js'
+import { Review } from './models/Review.js'
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -10,6 +11,8 @@ export const AppState = reactive({
   /** @type {Restaurant[]} */
   restaurants: [],
   /** @type {Restaurant} */
-  restaurant: null
+  restaurant: null,
+  /** @type {Review[]} */
+  reviews: []
 })
 
