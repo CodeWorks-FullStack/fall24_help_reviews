@@ -16,13 +16,17 @@ public class RestaurantsController : ControllerBase
     _reviewsService = reviewsService;
   }
 
+  // NOTE you do not have to be logged in to access this route
   [HttpGet]
-  public ActionResult<List<Restaurant>> GetRestaurants()
+  public async Task<ActionResult<List<Restaurant>>> GetRestaurants()
   {
 
     try
     {
-      List<Restaurant> restaurants = _rs.GetRestaurants();
+      // NOTE we can still see who is making the request
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      // NOTE make sure to add elvis operator if route is not authorized, because userInfo will be null
+      List<Restaurant> restaurants = _rs.GetRestaurants(userInfo?.Id);
       return Ok(restaurants);
     }
     catch (System.Exception e)
@@ -53,11 +57,12 @@ public class RestaurantsController : ControllerBase
 
 
   [HttpGet("{restaurantId}")]
-  public ActionResult<Restaurant> GetRestaurant(int restaurantId)
+  public async Task<ActionResult<Restaurant>> GetRestaurant(int restaurantId)
   {
     try
     {
-      Restaurant restaurant = _rs.Get(restaurantId);
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Restaurant restaurant = _rs.GetById(restaurantId, userInfo?.Id);
 
       return Ok(restaurant);
     }

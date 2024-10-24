@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { authGuard } from '@bcwdev/auth0provider-client'
+import { authGuard, authSettled } from '@bcwdev/auth0provider-client'
 
 function loadPage(page) {
   return () => import(`./pages/${page}.vue`)
@@ -9,7 +9,9 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('HomePage'),
+    // NOTE authSettled will stop the page from loading if you have a bearer token saved in your cookies
+    beforeEnter: authSettled
   },
   {
     path: '/account',
@@ -20,7 +22,8 @@ const routes = [
   {
     path: '/restaurants/:restaurantId',
     name: 'Restaurant',
-    component: loadPage('RestaurantPage')
+    component: loadPage('RestaurantPage'),
+    beforeEnter: authSettled
   }
 ]
 

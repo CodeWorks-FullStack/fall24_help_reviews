@@ -13,12 +13,19 @@ public class RestaurantsService
     _rr = rr;
   }
 
-  public List<Restaurant> GetRestaurants()
+  private List<Restaurant> GetRestaurants()
   {
     List<Restaurant> restaurants = _rr.GetRestaurants();
 
+    return restaurants;
+  }
+
+  public List<Restaurant> GetRestaurants(string userId)
+  {
+    List<Restaurant> restaurants = GetRestaurants();
     // return restaurants.FindAll(restaurant => restaurant.IsShutdown == false);
-    return restaurants.FindAll(restaurant => !restaurant.IsShutdown);
+    // NOTE findAll works very similar to filter in js
+    return restaurants.FindAll(restaurant => !restaurant.IsShutdown || restaurant.CreatorId == userId);
   }
 
   internal Restaurant CreateRestaurant(RestaurantCreationDTO creationData, Account userInfo)
@@ -30,7 +37,7 @@ public class RestaurantsService
     return _rr.CreateRestaurant(creationData, userInfo.Id);
   }
 
-  internal Restaurant Get(int restaurantId)
+  private Restaurant GetById(int restaurantId)
   {
 
     Restaurant restaurant = _rr.Get(restaurantId);
@@ -41,9 +48,23 @@ public class RestaurantsService
     return restaurant;
   }
 
+  internal Restaurant GetById(int restaurantId, string userId)
+  {
+    Restaurant restaurant = GetById(restaurantId);
+
+    if (restaurant.IsShutdown && restaurant.CreatorId != userId)
+    {
+      throw new Exception("NOT YOUR RESTAURANT");
+    }
+
+    return restaurant;
+  }
+
+
+
   internal Restaurant ShutdownRestaurant(int restaurantId, string userId)
   {
-    Restaurant restaurantToShutdown = Get(restaurantId);
+    Restaurant restaurantToShutdown = GetById(restaurantId);
 
     if (restaurantToShutdown.CreatorId != userId) throw new Exception("NOT YOUR RESTAURANT, BIG DAWG");
 
@@ -53,5 +74,6 @@ public class RestaurantsService
 
     return restaurantToShutdown;
   }
+
 
 }

@@ -19,6 +19,7 @@ async function getRestaurant() {
   }
   catch (error) {
     Pop.error(error);
+    logger.error(error)
   }
 }
 
