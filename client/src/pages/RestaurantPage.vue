@@ -36,6 +36,15 @@ async function getRestaurantReviews() {
   }
 }
 
+async function shutdownRestaurant() {
+  try {
+    await restaurantsService.shutdownRestaurant(route.params.restaurantId)
+  } catch (error) {
+    Pop.error(error)
+    logger.error(error)
+  }
+}
+
 onMounted(() => {
   getRestaurant()
   getRestaurantReviews()
@@ -74,9 +83,9 @@ onMounted(() => {
                   </div>
                 </div>
                 <div v-if="restaurant.creatorId == account?.id" class="d-flex gap-5">
-                  <button class="btn btn-success fs-5 fw-bold">
-                    <i class="mdi mdi-door"></i>
-                    Shut Down
+                  <button @click="shutdownRestaurant()" class="btn btn-success fs-5 fw-bold">
+                    <i class="mdi " :class="restaurant.isShutdown ? 'mdi-door-open' : 'mdi-door'"></i>
+                    {{ restaurant.isShutdown ? 'Open up' : 'Un-open up' }}
                   </button>
                 </div>
               </div>

@@ -8,9 +8,15 @@ class ReviewsService {
     const response = await api.post('api/reviews', reviewData)
     logger.log('CREATED REVIEW', response.data)
     const newReview = new Review(response.data)
-    AppState.reviews.push(newReview)
+
+    if (AppState.restaurant?.id == newReview.restaurantId) {
+      AppState.reviews.push(newReview)
+    }
+
     const restaurantThatReceicedReport = AppState.restaurants.find(restaurant => restaurant.id == newReview.restaurantId)
-    restaurantThatReceicedReport.reviewCount++
+    if (restaurantThatReceicedReport) {
+      restaurantThatReceicedReport.reviewCount++
+    }
   }
   async getRestaurantReviews(restaurantId) {
     const response = await api.get(`api/restaurants/${restaurantId}/reviews`)

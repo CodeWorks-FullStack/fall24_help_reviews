@@ -5,7 +5,7 @@ import Pop from '@/utils/Pop.js';
 import { computed, ref } from 'vue';
 
 
-const restaurants = computed(() => AppState.restaurants)
+const restaurants = computed(() => AppState.restaurantsForReview.filter(restaurant => !restaurant.isShutdown))
 const selectedRestaurant = computed(() => AppState.restaurants.find(restaurant => restaurant.id == editableReviewData.value.restaurantId))
 
 const editableReviewData = ref({

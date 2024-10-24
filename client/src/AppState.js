@@ -10,6 +10,8 @@ export const AppState = reactive({
   account: null,
   /** @type {Restaurant[]} */
   restaurants: [],
+  /** @type {Restaurant[]} */
+  restaurantsForReview: [],
   /** @type {Restaurant} */
   restaurant: null,
   /** @type {Review[]} */
