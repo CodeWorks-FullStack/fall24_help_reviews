@@ -27,7 +27,7 @@ onMounted(() => {
   <div class="container">
 
     <div class="restaurants row">
-      <div class="col-md-4" v-for="r in restaurants" :key="r.id">
+      <div class="col-md-4 mb-3" v-for="r in restaurants" :key="r.id">
         <RestaurantCard :restaurant="r" />
       </div>
     </div>

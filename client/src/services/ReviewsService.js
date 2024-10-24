@@ -4,6 +4,7 @@ import { AppState } from "@/AppState.js"
 import { Review } from "@/models/Review.js"
 
 class ReviewsService {
+
   async createReview(reviewData) {
     const response = await api.post('api/reviews', reviewData)
     logger.log('CREATED REVIEW', response.data)
@@ -17,11 +18,18 @@ class ReviewsService {
     if (restaurantThatReceicedReport) {
       restaurantThatReceicedReport.reviewCount++
     }
+
+    AppState.myReviews.push(newReview)
   }
   async getRestaurantReviews(restaurantId) {
     const response = await api.get(`api/restaurants/${restaurantId}/reviews`)
     logger.log(response.data)
     AppState.reviews = response.data.map(pojo => new Review(pojo))
+  }
+
+  async getMyReviews() {
+    const response = await api.get('account/reviews')
+    AppState.myReviews = response.data.map(pojo => new Review(pojo))
   }
 
 }

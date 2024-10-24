@@ -7,6 +7,7 @@ import { socketService } from './SocketService.js'
 import Pop from '@/utils/Pop.js'
 import { logger } from '@/utils/Logger.js'
 import { restaurantsService } from './RestaurantsService.js'
+import { reviewsService } from './ReviewsService.js'
 
 
 export const AuthService = initialize({
@@ -28,6 +29,7 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function () {
 
   try {
     await restaurantsService.getRestaurantsForReviews()
+    await reviewsService.getMyReviews()
   } catch (error) {
     Pop.error(error)
     logger.error(error)

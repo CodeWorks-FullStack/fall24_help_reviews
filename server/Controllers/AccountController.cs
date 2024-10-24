@@ -30,7 +30,7 @@ public class AccountController : ControllerBase
     }
   }
 
-  [HttpGet("/reviews")]
+  [HttpGet("reviews")]
   public async Task<ActionResult<List<RestaurantReview>>> GetReviews()
   {
     try
