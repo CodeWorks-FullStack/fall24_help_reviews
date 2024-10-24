@@ -6,12 +6,13 @@ import { reviewsService } from '@/services/ReviewsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const restaurant = computed(() => AppState.restaurant)
 const reviews = computed(() => AppState.reviews)
 const account = computed(() => AppState.account)
 const route = useRoute()
+const router = useRouter()
 
 async function getRestaurant() {
   try {
@@ -20,6 +21,9 @@ async function getRestaurant() {
   catch (error) {
     Pop.error(error);
     logger.error(error)
+    if (error.response.data == "NOT YOUR RESTAURANT") {
+      router.push({ name: 'Home' })
+    }
   }
 }
 
