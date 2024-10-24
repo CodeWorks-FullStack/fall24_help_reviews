@@ -15,7 +15,10 @@ public class RestaurantsService
 
   public List<Restaurant> GetRestaurants()
   {
-    return _rr.GetRestaurants();
+    List<Restaurant> restaurants = _rr.GetRestaurants();
+
+    // return restaurants.FindAll(restaurant => restaurant.IsShutdown == false);
+    return restaurants.FindAll(restaurant => !restaurant.IsShutdown);
   }
 
   internal Restaurant CreateRestaurant(RestaurantCreationDTO creationData, Account userInfo)
