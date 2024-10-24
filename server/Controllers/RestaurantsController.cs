@@ -73,14 +73,13 @@ public class RestaurantsController : ControllerBase
   }
 
 
-
-
   [HttpGet("{restaurantId}/reviews")]
-  public ActionResult<List<RestaurantReview>> GetReviews(int restaurantId)
+  public async Task<ActionResult<List<RestaurantReview>>> GetReviews(int restaurantId)
   {
     try
     {
-      List<RestaurantReview> reviews = _reviewsService.GetReviews(restaurantId);
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      List<RestaurantReview> reviews = _reviewsService.GetReviews(restaurantId, userInfo?.Id);
 
       return Ok(reviews);
 
